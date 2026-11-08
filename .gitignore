@@ -1,0 +1,10 @@
+node_modules/
+dist/
+public/assets/
+public/index.html
+data/state.json
+.env
+.DS_Store
+*.log
+coverage/
+.vite/
