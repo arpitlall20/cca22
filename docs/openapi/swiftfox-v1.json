@@ -1,0 +1,9642 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+ "title": "SwiftFox External API Gateway",
+ "version": "v1"
+ },
+ "paths": {
+ "/api/v1/circles": {
+ "get": {
+ "tags": [
+ "Circles"
+ ],
+ "parameters": [
+ {
+ "name": "domain",
+ "in": "query",
+ "description": "Filter by domain. Can match multiple domains.",
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ },
+ {
+ "name": "include",
+ "in": "query",
+ "description": "Filter by include. Can match multiple values.",
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ },
+ {
+ "name": "roles",
+ "in": "query",
+ "description": "Filter by roles. Can match multiple roles.",
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ },
+ {
+ "name": "type",
+ "in": "query",
+ "description": "Filter by circle type (circle, domain, unit).",
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ },
+ {
+ "name": "pageNo",
+ "in": "query",
+ "description": "Pagination page number (1-based).",
+ "schema": {
+ "type": "integer",
+ "format": "int32",
+ "default": 1
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "description": "Pagination page size.",
+ "schema": {
+ "type": "integer",
+ "format": "int32",
+ "default": 50
+ }
+ },
+ {
+ "name": "search",
+ "in": "query",
+ "description": "Search term for circle name.",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Services.CirclesResponse"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/contact": {
+ "put": {
+ "tags": [
+ "Contacts & Addresses"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.UpdateContactInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/contact/{id}": {
+ "delete": {
+ "tags": [
+ "Contacts & Addresses"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/address/{id}": {
+ "delete": {
+ "tags": [
+ "Contacts & Addresses"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/contact/make_primary": {
+ "put": {
+ "tags": [
+ "Contacts & Addresses"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.MakeContactPrimaryInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/address/make_primary": {
+ "put": {
+ "tags": [
+ "Contacts & Addresses"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Core.MakeAddressPrimaryGQL.Variables"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/address_part/autocomplete": {
+ "get": {
+ "tags": [
+ "Contacts & Addresses"
+ ],
+ "parameters": [
+ {
+ "name": "addressPart",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "search",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "countryCode",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/creditcard/{id}": {
+ "post": {
+ "tags": [
+ "Credit Cards"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.MonthOfYearInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateCreditCardExpiryGQL.Response.CreditCardModelSelection"
+ }
+ }
+ }
+ }
+ }
+ },
+ "delete": {
+ "tags": [
+ "Credit Cards"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.DeleteCreditCardGQL.Response.DeleteResultSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/customer/{id}/defaultCreditCard": {
+ "post": {
+ "tags": [
+ "Customers"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "defaultCreditCardId",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SetCustomerDefaultCreditCardGQL.Response.CustomerModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/debit/{id}": {
+ "delete": {
+ "tags": [
+ "Direct Debits"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.DeleteBankAccountGQL.Response.DeleteResultSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/debit/create": {
+ "post": {
+ "tags": [
+ "Direct Debits"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateDebitGQL.Variables"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateDebitGQL.Response.DirectDebitModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/events/{id}/invitees": {
+ "get": {
+ "tags": [
+ "Events"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageNumber",
+ "in": "query",
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.EventInviteesResponse"
+ }
+ }
+ }
+ },
+ "400": {
+ "description": "Bad Request",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "string"
+ }
+ }
+ }
+ },
+ "502": {
+ "description": "Server Error",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/events/{id}/add_to_event": {
+ "post": {
+ "tags": [
+ "Events"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.AddPeopleToEventInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.BulkUpdateInviteStatusGQL.Response.AddRecordsResultModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/events/{id}/attendees/{personId}/update_rsvp": {
+ "post": {
+ "tags": [
+ "Events"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "personId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.UpdateRsvpInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.UpdateAttendeeGQL.Response.UpdateInviteStatusResponseSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/events": {
+ "post": {
+ "tags": [
+ "Events"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.GetEventsRequest"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection"
+ }
+ }
+ }
+ },
+ "400": {
+ "description": "Bad Request",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/events/fields": {
+ "get": {
+ "tags": [
+ "Events"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.EventCustomFieldResponse"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/events/rsvp_options": {
+ "get": {
+ "tags": [
+ "Events"
+ ],
+ "parameters": [
+ {
+ "name": "excludeDeleted",
+ "in": "query",
+ "schema": {
+ "type": "boolean"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.EventRsvpStatusResponse"
+ }
+ }
+ }
+ }
+ },
+ "502": {
+ "description": "Server Error",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/financial_config": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "allowedProviders",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ },
+ {
+ "name": "allowedMethods",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FinancialConfigGQL.Response.CapabilitySelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/tax_rates": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "includeDeleted",
+ "in": "query",
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "pageNumber",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "asc",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "column",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.TaxRatesGQL.Response.PaginatedListOfTaxRateModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/all_plans": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "ids",
+ "in": "query",
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/plan_fees": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "planIds",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanFeesForResolutionGQL.Response.PlanFeeModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/customer/{id}": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "ownerType",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection"
+ }
+ }
+ }
+ }
+ },
+ "deprecated": true
+ }
+ },
+ "/api/v1/customers/{id}": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "ownerType",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/card_intent/{id}": {
+ "post": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.CompleteIntentInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/debit_intent/{id}": {
+ "post": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.CompleteIntentInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/direct_debit/create": {
+ "post": {
+ "tags": [
+ "Financial"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateDebitGQL.Variables"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateDebitGQL.Response.DirectDebitModelSelection"
+ }
+ }
+ }
+ }
+ },
+ "deprecated": true
+ }
+ },
+ "/api/v1/prorate_fee/{feeId}": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "feeId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "integer",
+ "format": "int64"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/prorate_quote/{feeId}": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "feeId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "optionIds",
+ "in": "query",
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ProrateQuoteGQL.Response.SubscriptionProrateQuoteModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/receipts": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageNo",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "from",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string",
+ "format": "date-time"
+ }
+ },
+ {
+ "name": "to",
+ "in": "query",
+ "schema": {
+ "type": "string",
+ "format": "date-time"
+ }
+ },
+ {
+ "name": "column",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "asc",
+ "in": "query",
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "search",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/receipt/{id}": {
+ "get": {
+ "tags": [
+ "Financial"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/form": {
+ "get": {
+ "tags": [
+ "Forms"
+ ],
+ "parameters": [
+ {
+ "name": "search",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.FindFormsGQL.Response.PaginatedListOfFormListModelGraphTypeSelection.FormListModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/form/{id}/definition": {
+ "get": {
+ "tags": [
+ "Forms"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/form/{id}/organisation-suggestions": {
+ "get": {
+ "tags": [
+ "Forms"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "blockId",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "searchString",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ },
+ "400": {
+ "description": "Bad Request"
+ }
+ }
+ }
+ },
+ "/api/v1/form/submit": {
+ "post": {
+ "tags": [
+ "Forms"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.FormSubmissionInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.ValidateAndSubmitResponseGQL.Response.ValidateAndSubmitFormResponseResultSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/form/calculate_points": {
+ "post": {
+ "tags": [
+ "Forms"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.CalculateFormPointsInputModelInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "number",
+ "format": "double"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/form/{id}/submissions": {
+ "get": {
+ "tags": [
+ "Forms"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "dateFrom",
+ "in": "query",
+ "description": "Include responses submitted on or after this timestamp.",
+ "schema": {
+ "type": "string",
+ "format": "date-time"
+ }
+ },
+ {
+ "name": "dateTo",
+ "in": "query",
+ "description": "Include responses submitted on or before this timestamp.",
+ "schema": {
+ "type": "string",
+ "format": "date-time"
+ }
+ },
+ {
+ "name": "pageNumber",
+ "in": "query",
+ "description": "One-based page number.",
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "description": "Number of responses to return per page.",
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.FormSubmissionsResponse"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/invoice/{id}": {
+ "get": {
+ "tags": [
+ "Invoices"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/invoice/pay_invoice": {
+ "post": {
+ "tags": [
+ "Invoices"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PayInvoiceGQL.Variables"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/list/{id}/records": {
+ "get": {
+ "tags": [
+ "Lists"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "schema": {
+ "type": "integer",
+ "format": "int32",
+ "default": 50
+ }
+ },
+ {
+ "name": "pageNumber",
+ "in": "query",
+ "schema": {
+ "type": "integer",
+ "format": "int32",
+ "default": 1
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "Lists"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.AddRecordsToStaticListInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "delete": {
+ "tags": [
+ "Lists"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.RemoveRecordsToStaticListInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v2/list/{id}/records": {
+ "get": {
+ "tags": [
+ "Lists"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "schema": {
+ "type": "integer",
+ "format": "int32",
+ "default": 50
+ }
+ },
+ {
+ "name": "cursor",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/me": {
+ "get": {
+ "tags": [
+ "Misc"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.UserResponse"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/orgs": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "name",
+ "in": "query",
+ "description": "Gets or sets the organisation name filter.",
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "knownAsName",
+ "in": "query",
+ "description": "Gets or sets the known-as name filter.",
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "categoryType",
+ "in": "query",
+ "description": "Gets or sets an optional category type filter.",
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "description": "Gets or sets the number of results per page.",
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageNo",
+ "in": "query",
+ "description": "Gets or sets the one-based page number.",
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.OrganisationInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/data-table": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[SwiftFox.Gateway.Host.Models.CustomFieldsMetadata, SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "description": "Gets or sets the record identifier to search for.",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "put": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": { }
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/interests": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/categories": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/turnover": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/employeecount": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/industry": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/jurisdictions": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/contacts": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.ContactsInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/contact": {
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.ContactsInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/addresses": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.AddressInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/invoices": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "page",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "asc",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "column",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "filters",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoicesGQL.Response.PaginatedListOfInvoiceOverviewModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/addresstypes": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/address": {
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.AddressInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "put": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.UpdateAddressInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/receipts": {
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/ReceiptInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "page",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "asc",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "column",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "filters",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/fields": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/fields/{fieldId}/bulk-set": {
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "fieldId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.BulkSetFieldRequest"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/posts": {
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.PostInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/posts/{postId}": {
+ "put": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "postId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.PostInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/data-table/{tableId}": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "page",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": { }
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/data-table/{tableId}/{rowId}": {
+ "put": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "rowId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": { }
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "delete": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "rowId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.DeleteDataTableRowResponse"
+ }
+ }
+ }
+ },
+ "404": {
+ "description": "Not Found",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ },
+ "403": {
+ "description": "Forbidden",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/subscription": {
+ "put": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/UpdateSubscriptionInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/orgs/{id}/subscription/update": {
+ "post": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/UpdateSubscriptionInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ },
+ "deprecated": true
+ }
+ },
+ "/api/v1/orgs/{id}/subscriptions": {
+ "get": {
+ "tags": [
+ "Organisations"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/intent": {
+ "post": {
+ "tags": [
+ "Payment Intents"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.SetupIntentInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Services.FinancialManager.SetupIntentResponse.IntentWithData"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/intent/update": {
+ "post": {
+ "tags": [
+ "Payment Intents"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdatePaymentIntentGQL.Variables"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Services.FinancialManager.UpdateIntentResponse.UpdatedIntentWithData"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/people": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.PersonInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/by-ids": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "ids",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "maxItems": 100,
+ "minItems": 1,
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ },
+ "400": {
+ "description": "Bad Request",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/people/data-table": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[SwiftFox.Gateway.Host.Models.CustomFieldsMetadata, SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/people/interests": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/categories": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/languages": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/addresstypes": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/fields": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/fields/{fieldId}/bulk-set": {
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "fieldId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.BulkSetFieldRequest"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "description": "Gets or sets the record identifier to search for.",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "put": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": { }
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/contacts": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.ContactsInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/contact": {
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.ContactsInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/address": {
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.AddressInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "put": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.UpdateAddressInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/receipts": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "page",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "asc",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "column",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "filters",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/ReceiptInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/invoices": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "page",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "asc",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "boolean"
+ }
+ },
+ {
+ "name": "column",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "filters",
+ "in": "query",
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoicesGQL.Response.PaginatedListOfInvoiceOverviewModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/subscription": {
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SubscriptionInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ },
+ "400": {
+ "description": "Bad Request",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "put": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/UpdateSubscriptionInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/addresses": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.AddressInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/posts": {
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.PostInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/posts/{postId}": {
+ "put": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "postId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.PostInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/data-table/{tableId}": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "page",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "pageSize",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": { }
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/data-table/{tableId}/{rowId}": {
+ "put": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "rowId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "object",
+ "additionalProperties": { }
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ },
+ "delete": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ {
+ "name": "tableId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "rowId",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.DeleteDataTableRowResponse"
+ }
+ }
+ }
+ },
+ "404": {
+ "description": "Not Found",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ },
+ "403": {
+ "description": "Forbidden",
+ "content": {
+ "application/problem+json": {
+ "schema": {
+ "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/people/{id}/subscription/update": {
+ "post": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/UpdateSubscriptionInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ },
+ "deprecated": true
+ }
+ },
+ "/api/v1/people/{id}/subscriptions": {
+ "get": {
+ "tags": [
+ "People"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/subscription/outstanding": {
+ "get": {
+ "tags": [
+ "Subscriptions"
+ ],
+ "parameters": [
+ {
+ "name": "ownerId",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ },
+ {
+ "name": "ownerType",
+ "in": "query",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionOutstandingGQL.Response.LineItemModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/subscription/{id}": {
+ "delete": {
+ "tags": [
+ "Subscriptions"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ }
+ },
+ "get": {
+ "tags": [
+ "Subscriptions"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/subscription/update_payment_method": {
+ "post": {
+ "tags": [
+ "Subscriptions"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/UpdateSubscriptionPaymentMethodInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/subscription/{id}/payable_line_items": {
+ "get": {
+ "tags": [
+ "Subscriptions"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "application/json": {
+ "schema": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionPayableLineItemsGQL.Response.LineItemModelSelection"
+ }
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/": {
+ "get": {
+ "tags": [
+ "SwiftFox.Gateway.Host"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "text/plain": {
+ "schema": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/org_membership": {
+ "post": {
+ "tags": [
+ "SwiftFox.Gateway.Host"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Core.CreateOrganizationMembershipModelInputGraphType"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/org_membership/{id}": {
+ "delete": {
+ "tags": [
+ "SwiftFox.Gateway.Host"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "integer",
+ "format": "int32"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/version": {
+ "get": {
+ "tags": [
+ "SwiftFox.Gateway.Host"
+ ],
+ "responses": {
+ "200": {
+ "description": "Success",
+ "content": {
+ "text/plain": {
+ "schema": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ }
+ }
+ },
+ "/api/v1/hook": {
+ "post": {
+ "tags": [
+ "WebHooks"
+ ],
+ "requestBody": {
+ "content": {
+ "application/json": {
+ "schema": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.SubscribeInput"
+ }
+ }
+ },
+ "required": true
+ },
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/hook/{id}": {
+ "delete": {
+ "tags": [
+ "WebHooks"
+ ],
+ "parameters": [
+ {
+ "name": "id",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ },
+ "/api/v1/hook-latest/{eventName}": {
+ "get": {
+ "tags": [
+ "WebHooks"
+ ],
+ "parameters": [
+ {
+ "name": "eventName",
+ "in": "path",
+ "required": true,
+ "schema": {
+ "type": "string"
+ }
+ }
+ ],
+ "responses": {
+ "200": {
+ "description": "Success"
+ }
+ }
+ }
+ }
+ },
+ "components": {
+ "schemas": {
+ "<>f__AnonymousType0`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[SwiftFox.Gateway.Host.Models.CustomFieldsMetadata, SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "string",
+ "nullable": true
+ },
+ "title": {
+ "type": "string",
+ "nullable": true
+ },
+ "fields": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[SwiftFox.Gateway.Host.Models.CustomFieldsMetadata, SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "<>f__AnonymousType1`4[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[SwiftFox.Gateway.Host.Models.CustomFieldsMetadata, SwiftFox.Gateway.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+ "type": "object",
+ "properties": {
+ "type": {
+ "type": "string",
+ "nullable": true
+ },
+ "label": {
+ "type": "string",
+ "nullable": true
+ },
+ "meta": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.CustomFieldsMetadata"
+ },
+ "fieldId": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+ "type": "object",
+ "properties": {
+ "type": {
+ "type": "string",
+ "nullable": true
+ },
+ "title": {
+ "type": "string",
+ "nullable": true
+ },
+ "status": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "detail": {
+ "type": "string",
+ "nullable": true
+ },
+ "instance": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": { }
+ },
+ "ReceiptInput": {
+ "type": "object",
+ "properties": {
+ "effectiveDate": {
+ "type": "string",
+ "format": "date"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "lines": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateLineItemModelInput"
+ },
+ "nullable": true
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "method": {
+ "type": "string",
+ "nullable": true
+ },
+ "transactionRef": {
+ "type": "string",
+ "nullable": true
+ },
+ "receiptNo": {
+ "type": "string",
+ "nullable": true
+ },
+ "charge": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "directDebitId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true,
+ "deprecated": true
+ },
+ "replaces": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SubscriptionInput": {
+ "type": "object",
+ "properties": {
+ "feeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "directDebitId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true,
+ "deprecated": true
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OptionsEditModelInput"
+ },
+ "nullable": true
+ },
+ "method": {
+ "type": "string",
+ "nullable": true
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "paymentConfig": {
+ "type": "string",
+ "nullable": true
+ },
+ "skipPayment": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "start": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.DataModels.AddPeopleToEventInput": {
+ "type": "object",
+ "properties": {
+ "personIds": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "description": "Gets or sets the list of person identifiers to add to the event.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for adding people to an event."
+ },
+ "SwiftFox.Gateway.Host.DataModels.BulkSetFieldRequest": {
+ "type": "object",
+ "properties": {
+ "ids": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "nullable": true
+ },
+ "value": {
+ "nullable": true
+ },
+ "add": {
+ "type": "boolean"
+ },
+ "replace": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Request contract for bulk setting a single field across multiple entities."
+ },
+ "SwiftFox.Gateway.Host.DataModels.CompleteIntentInput": {
+ "type": "object",
+ "properties": {
+ "data": {
+ "type": "string",
+ "description": "Gets or sets the provider-specific completion data.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for completing a payment intent."
+ },
+ "SwiftFox.Gateway.Host.DataModels.DeleteDataTableRowResponse": {
+ "type": "object",
+ "properties": {
+ "deleted": {
+ "type": "boolean",
+ "description": "Whether the row was deleted."
+ }
+ },
+ "additionalProperties": false,
+ "description": "Reports whether the requested data-table row was deleted."
+ },
+ "SwiftFox.Gateway.Host.DataModels.EventCustomFieldResponse": {
+ "type": "object",
+ "properties": {
+ "label": {
+ "type": "string",
+ "description": "Gets the display label for the field.",
+ "nullable": true
+ },
+ "fieldId": {
+ "type": "string",
+ "description": "Gets the unique field identifier.",
+ "nullable": true
+ },
+ "type": {
+ "type": "string",
+ "description": "Gets the field type.",
+ "nullable": true
+ },
+ "meta": {
+ "$ref": "#/components/schemas/System.Text.Json.Nodes.JsonNode"
+ },
+ "supportedOperators": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "description": "Gets the supported operators for this field type.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Represents an event custom field with parsed metadata and supported operators."
+ },
+ "SwiftFox.Gateway.Host.DataModels.EventFilterParameter": {
+ "type": "object",
+ "properties": {
+ "fieldId": {
+ "type": "string",
+ "description": "Gets the field identifier to filter on.",
+ "nullable": true
+ },
+ "operator": {
+ "type": "string",
+ "description": "Gets the operator to apply (e.g., contains, is, gte).",
+ "nullable": true
+ },
+ "filterValue": {
+ "anyOf": [
+ {
+ "type": "string"
+ },
+ {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ },
+ {
+ "type": "array",
+ "items": {
+ "required": [
+ "id",
+ "type"
+ ],
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "string"
+ },
+ "type": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ ],
+ "description": "Filter value(s): a single string, array of strings, array of {id, type} objects, or null for 'is empty' operators.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Represents a simplified filter parameter for event queries."
+ },
+ "SwiftFox.Gateway.Host.DataModels.EventInviteeResponse": {
+ "required": [
+ "recordId"
+ ],
+ "type": "object",
+ "properties": {
+ "recordId": {
+ "type": "integer",
+ "description": "Gets the SwiftFox record identifier.",
+ "format": "int32"
+ },
+ "rsvpStatus": {
+ "type": "string",
+ "description": "Gets the RSVP option identifier, or null if no RSVP has been recorded.",
+ "nullable": true
+ },
+ "rsvpStatusDisplayName": {
+ "type": "string",
+ "description": "Gets the tenant-defined display label for the RSVP status.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "An event invitee and their current RSVP status."
+ },
+ "SwiftFox.Gateway.Host.DataModels.EventInviteesResponse": {
+ "required": [
+ "results",
+ "total"
+ ],
+ "type": "object",
+ "properties": {
+ "total": {
+ "type": "integer",
+ "description": "Gets the total number of invitees for the event.",
+ "format": "int32"
+ },
+ "results": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.EventInviteeResponse"
+ },
+ "description": "Gets the invitees in the requested page."
+ }
+ },
+ "additionalProperties": false,
+ "description": "A paginated collection of event invitees."
+ },
+ "SwiftFox.Gateway.Host.DataModels.EventRsvpStatusResponse": {
+ "required": [
+ "displayName",
+ "id"
+ ],
+ "type": "object",
+ "properties": {
+ "id": {
+ "minLength": 1,
+ "type": "string",
+ "description": "Gets the stable status identifier."
+ },
+ "displayName": {
+ "minLength": 1,
+ "type": "string",
+ "description": "Gets the tenant-defined display name."
+ },
+ "isDeleted": {
+ "type": "boolean",
+ "description": "Gets whether the status has been deleted.",
+ "nullable": true
+ },
+ "hideInsight": {
+ "type": "boolean",
+ "description": "Gets whether the status is hidden from event insights.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "A tenant-defined event RSVP status."
+ },
+ "SwiftFox.Gateway.Host.DataModels.FormSubmissionInput": {
+ "type": "object",
+ "properties": {
+ "answers": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.QuestionAnswerWithDataInput"
+ },
+ "description": "The answers to submit.",
+ "nullable": true
+ },
+ "disableSubmitPost": {
+ "type": "boolean",
+ "description": "Whether to suppress creation of the form submission post.",
+ "nullable": true
+ },
+ "email": {
+ "type": "string",
+ "description": "The submitter's email address.",
+ "nullable": true
+ },
+ "flowTriggerKey": {
+ "type": "string",
+ "description": "An optional workflow trigger key.",
+ "nullable": true
+ },
+ "formId": {
+ "type": "integer",
+ "description": "The form identifier.",
+ "format": "int32"
+ },
+ "isExternalRequest": {
+ "type": "boolean",
+ "description": "Whether the response originated outside SwiftFox."
+ },
+ "metadata": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.FormResponseMetadataModelInput"
+ },
+ "description": "Additional response metadata.",
+ "nullable": true
+ },
+ "name": {
+ "type": "string",
+ "description": "The submitter's name.",
+ "nullable": true
+ },
+ "personId": {
+ "type": "string",
+ "description": "An existing person identifier associated with the response.",
+ "nullable": true
+ },
+ "requestId": {
+ "type": "string",
+ "description": "An idempotency identifier supplied by the caller.",
+ "nullable": true
+ },
+ "target": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.EntityModelInput"
+ }
+ },
+ "additionalProperties": false,
+ "description": "A form response submitted through the external API."
+ },
+ "SwiftFox.Gateway.Host.DataModels.FormSubmissionQuestionResponse": {
+ "type": "object",
+ "properties": {
+ "questionId": {
+ "type": "integer",
+ "description": "Form question identifier, when the question still exists on the form definition.",
+ "format": "int32",
+ "nullable": true
+ },
+ "questionName": {
+ "type": "string",
+ "description": "Stable form question name used by the stored answer.",
+ "nullable": true
+ },
+ "questionTitle": {
+ "type": "string",
+ "description": "Human-readable form question title.",
+ "nullable": true
+ },
+ "response": {
+ "description": "Formatted answer value.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "One question answer from a form submission."
+ },
+ "SwiftFox.Gateway.Host.DataModels.FormSubmissionResponse": {
+ "type": "object",
+ "properties": {
+ "responseId": {
+ "type": "integer",
+ "description": "Form response identifier.",
+ "format": "int32"
+ },
+ "submittedAt": {
+ "type": "string",
+ "description": "Timestamp when the response was submitted.",
+ "format": "date-time"
+ },
+ "submittedBy": {
+ "type": "integer",
+ "description": "User identifier that submitted the response.",
+ "format": "int32"
+ },
+ "recordId": {
+ "type": "integer",
+ "description": "Related target record identifier, when available.",
+ "format": "int32",
+ "nullable": true
+ },
+ "recordType": {
+ "type": "string",
+ "description": "Related target record type, when available.",
+ "nullable": true
+ },
+ "questions": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.FormSubmissionQuestionResponse"
+ },
+ "description": "Question answers submitted with this response.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "A form submission."
+ },
+ "SwiftFox.Gateway.Host.DataModels.FormSubmissionsResponse": {
+ "type": "object",
+ "properties": {
+ "totalResults": {
+ "type": "integer",
+ "description": "Total response count before pagination.",
+ "format": "int32"
+ },
+ "pageSize": {
+ "type": "integer",
+ "description": "Number of responses requested per page.",
+ "format": "int32"
+ },
+ "pageNumber": {
+ "type": "integer",
+ "description": "One-based page number.",
+ "format": "int32"
+ },
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.FormSubmissionResponse"
+ },
+ "description": "Submissions for the current page.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Paginated form submissions."
+ },
+ "SwiftFox.Gateway.Host.DataModels.GetEventsRequest": {
+ "type": "object",
+ "properties": {
+ "page": {
+ "type": "integer",
+ "description": "Gets the page number (1-based).",
+ "format": "int32",
+ "default": 1
+ },
+ "pageSize": {
+ "type": "integer",
+ "description": "Gets the page size.",
+ "format": "int32",
+ "default": 20
+ },
+ "search": {
+ "type": "string",
+ "description": "Gets the optional search term.",
+ "nullable": true
+ },
+ "filters": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.DataModels.EventFilterParameter"
+ },
+ "description": "Gets the optional list of filter parameters.",
+ "nullable": true
+ },
+ "circles": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "description": "Circle filter",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Request model for querying events."
+ },
+ "SwiftFox.Gateway.Host.DataModels.SubscribeInput": {
+ "type": "object",
+ "properties": {
+ "eventName": {
+ "type": "string",
+ "description": "The name of the event to subscribe to.",
+ "nullable": true
+ },
+ "url": {
+ "type": "string",
+ "description": "The callback URL that receives event notifications.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input record for subscribing to a webhook event."
+ },
+ "SwiftFox.Gateway.Host.DataModels.UpdateRsvpInput": {
+ "type": "object",
+ "properties": {
+ "status": {
+ "type": "string",
+ "description": "The new RSVP status (e.g., \"Accepted\", \"Declined\", \"Tentative\").",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for updating an RSVP status."
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Core.CreateOrganizationMembershipModelInputGraphType": {
+ "type": "object",
+ "properties": {
+ "from": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "organizationId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "personId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "positionName": {
+ "type": "string",
+ "nullable": true
+ },
+ "to": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "workplaceId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Core.MakeAddressPrimaryGQL.Variables": {
+ "type": "object",
+ "properties": {
+ "relId": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Core.OwnerModelInputGraphType": {
+ "type": "object",
+ "properties": {
+ "ownerId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "ownerType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Core.OwnerType"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Core.OwnerType": {
+ "enum": [
+ "Address",
+ "Contact",
+ "Organization",
+ "OrganizationMembership",
+ "Person",
+ "Relationship",
+ "RelationshipAddressDescription",
+ "RelationshipContactDescriptionModel",
+ "RelationshipOrganizationMembershipDescription",
+ "Tag",
+ "User",
+ "Workplace"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.AddRecordFailReason": {
+ "enum": [
+ "AlreadyInList",
+ "MissingInfo",
+ "NotAllowed"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.BulkUpdateInviteStatusGQL.Response.AddRecordsResultModelSelection": {
+ "type": "object",
+ "properties": {
+ "listId": {
+ "type": "string",
+ "nullable": true
+ },
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.BulkUpdateInviteStatusGQL.Response.AddRecordsResultModelSelection.AddRecordResultSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.BulkUpdateInviteStatusGQL.Response.AddRecordsResultModelSelection.AddRecordResultSelection": {
+ "type": "object",
+ "properties": {
+ "recordId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "isAdded": {
+ "type": "boolean"
+ },
+ "reason": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.AddRecordFailReason"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection": {
+ "type": "object",
+ "properties": {
+ "total": {
+ "type": "number",
+ "format": "double"
+ },
+ "results": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection.EventSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection.EventSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "string",
+ "nullable": true
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "isDeleted": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "eventStart": {
+ "type": "string",
+ "format": "date-time",
+ "nullable": true
+ },
+ "eventEnd": {
+ "type": "string",
+ "format": "date-time",
+ "nullable": true
+ },
+ "timezone": {
+ "type": "string",
+ "nullable": true
+ },
+ "description": {
+ "type": "string",
+ "nullable": true
+ },
+ "location": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection.EventSelection.EventAddressSelection"
+ },
+ "fieldValues": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection.EventSelection.FieldValueSelection"
+ },
+ "nullable": true
+ },
+ "zoomId": {
+ "type": "string",
+ "nullable": true
+ },
+ "meetingUrl": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerCircle": {
+ "type": "string",
+ "nullable": true
+ },
+ "circles": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "nullable": true
+ },
+ "tags": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection.EventSelection.EventAddressSelection": {
+ "type": "object",
+ "properties": {
+ "address1": {
+ "type": "string",
+ "nullable": true
+ },
+ "formatted": {
+ "type": "string",
+ "nullable": true
+ },
+ "lat": {
+ "type": "number",
+ "format": "double",
+ "nullable": true
+ },
+ "lng": {
+ "type": "number",
+ "format": "double",
+ "nullable": true
+ },
+ "building": {
+ "type": "string",
+ "nullable": true
+ },
+ "country": {
+ "type": "string",
+ "nullable": true
+ },
+ "locality": {
+ "type": "string",
+ "nullable": true
+ },
+ "postcode": {
+ "type": "string",
+ "nullable": true
+ },
+ "state": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.EventsGQL.Response.EventQueryResultSelection.EventSelection.FieldValueSelection": {
+ "type": "object",
+ "properties": {
+ "fieldId": {
+ "type": "string",
+ "nullable": true
+ },
+ "value": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Festival.UpdateAttendeeGQL.Response.UpdateInviteStatusResponseSelection": {
+ "type": "object",
+ "properties": {
+ "success": {
+ "type": "boolean"
+ },
+ "message": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.BankAccountCapabilities": {
+ "enum": [
+ "CREDIT",
+ "DEBIT"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.BankAccountCountryProvider": {
+ "enum": [
+ "AUSTRALIA",
+ "NEW_ZEALAND"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus"
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "overrideMode": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode"
+ },
+ "overrideAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "planType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "version": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CancelSubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "application": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "uses": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateDebitGQL.Response.DirectDebitModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "bsb": {
+ "type": "string",
+ "nullable": true
+ },
+ "account": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateDebitGQL.Variables": {
+ "type": "object",
+ "properties": {
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ },
+ "bsb": {
+ "type": "string",
+ "nullable": true
+ },
+ "account": {
+ "type": "string",
+ "nullable": true
+ },
+ "accountName": {
+ "type": "string",
+ "nullable": true
+ },
+ "sourceId": {
+ "type": "string",
+ "nullable": true
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateLineItemModelInput": {
+ "type": "object",
+ "properties": {
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "invoiceId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "invoiceLineItemId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus"
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "overrideMode": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode"
+ },
+ "overrideAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "planType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "version": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreateSubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "application": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "uses": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CreditCardType": {
+ "enum": [
+ "AMEX",
+ "DISCOVER",
+ "JCB",
+ "MASTERCARD",
+ "OTHER",
+ "UNION_PAY",
+ "UNSPECIFIED",
+ "VISA"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "customerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "defaultCreditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "creditCards": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection.CreditCardModelSelection"
+ },
+ "nullable": true
+ },
+ "bankAccounts": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection.BankAccountModelSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection.BankAccountModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "bsb": {
+ "type": "string",
+ "nullable": true
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "account": {
+ "type": "string",
+ "nullable": true
+ },
+ "accountName": {
+ "type": "string",
+ "nullable": true
+ },
+ "inUse": {
+ "type": "boolean"
+ },
+ "capabilities": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.BankAccountCapabilities"
+ },
+ "countryProvider": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.BankAccountCountryProvider"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection.CreditCardModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreditCardType"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "maskedNumber": {
+ "type": "string",
+ "nullable": true
+ },
+ "expires": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection.CreditCardModelSelection.MonthOfYearSelection"
+ },
+ "inUse": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.CustomersGQL.Response.CustomerModelSelection.CreditCardModelSelection.MonthOfYearSelection": {
+ "type": "object",
+ "properties": {
+ "month": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "year": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.DeleteBankAccountGQL.Response.DeleteResultSelection": {
+ "type": "object",
+ "properties": {
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.DeleteStatus"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.DeleteCreditCardGQL.Response.DeleteResultSelection": {
+ "type": "object",
+ "properties": {
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.DeleteStatus"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.DeleteStatus": {
+ "enum": [
+ "ERROR",
+ "IN_USE",
+ "SUCCESS"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FinancialConfigGQL.Response.CapabilitySelection": {
+ "type": "object",
+ "properties": {
+ "common": {
+ "type": "string",
+ "nullable": true
+ },
+ "providers": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FinancialConfigGQL.Response.CapabilitySelection.PaymentCapabilitySelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FinancialConfigGQL.Response.CapabilitySelection.PaymentCapabilitySelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "providerExtension": {
+ "type": "string",
+ "nullable": true
+ },
+ "instanceId": {
+ "type": "string",
+ "nullable": true
+ },
+ "capabilities": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ProviderCapability"
+ },
+ "nullable": true
+ },
+ "settings": {
+ "type": "string",
+ "nullable": true
+ },
+ "disabledAt": {
+ "type": "string",
+ "format": "date-time",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection": {
+ "type": "object",
+ "properties": {
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection"
+ },
+ "nullable": true
+ },
+ "totalResults": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "createdOn": {
+ "type": "string",
+ "format": "date-time"
+ },
+ "effectiveDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "description": {
+ "type": "string",
+ "nullable": true
+ },
+ "refunded": {
+ "type": "boolean"
+ },
+ "transactionRef": {
+ "type": "string",
+ "nullable": true
+ },
+ "receiptNo": {
+ "type": "string",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "status": {
+ "type": "string",
+ "nullable": true
+ },
+ "success": {
+ "type": "boolean"
+ },
+ "pending": {
+ "type": "boolean"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "replacementId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineItems": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection"
+ },
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "direction": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentDirection"
+ },
+ "balances": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.SubscriptionBalanceModelSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "lineType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection.LineTypeModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection.LineTypeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.FindReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.SubscriptionBalanceModelSelection": {
+ "type": "object",
+ "properties": {
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "arrearsPrev": {
+ "type": "integer",
+ "format": "int64"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.Interval": {
+ "enum": [
+ "ANNUAL",
+ "DAILY",
+ "FORTNIGHTLY",
+ "FOUR_WEEKLY",
+ "IRREGULAR",
+ "MONTHLY",
+ "QUARTERLY",
+ "WEEKLY"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection": {
+ "type": "object",
+ "properties": {
+ "createdOn": {
+ "type": "string",
+ "format": "date-time"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "date": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "integrationInvoiceNumber": {
+ "type": "string",
+ "nullable": true
+ },
+ "integrationType": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceStatus"
+ },
+ "totalAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "totalPaidAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "totalPendingAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "who": {
+ "type": "string",
+ "nullable": true
+ },
+ "due": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "integrationReference": {
+ "type": "string",
+ "nullable": true
+ },
+ "integrationTenant": {
+ "type": "string",
+ "nullable": true
+ },
+ "integrationMetadata": {
+ "type": "string",
+ "nullable": true
+ },
+ "lineItems": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection"
+ },
+ "nullable": true
+ },
+ "reference": {
+ "type": "string",
+ "nullable": true
+ },
+ "totalAmountPreTax": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "totalTaxAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "balanceOutstanding": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "adjustments": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.AdjustmentModelSelection"
+ },
+ "nullable": true
+ },
+ "receiptAllocations": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.ReceiptAllocationModelSelection"
+ },
+ "nullable": true
+ },
+ "period": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionPeriodModelSelection"
+ },
+ "subscription": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.AdjustmentModelSelection": {
+ "type": "object",
+ "properties": {
+ "date": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "adjustmentType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.AdjustmentModelSelection.TagModelSelection"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "taxAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.AdjustmentModelSelection.TagModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "invoiceId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "quantity": {
+ "type": "number",
+ "format": "double"
+ },
+ "itemCode": {
+ "type": "string",
+ "nullable": true
+ },
+ "item": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection.ItemModelSelection"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "unitAmount": {
+ "type": "number",
+ "format": "double"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "taxAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection.TaxRateModelSelection"
+ },
+ "account": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection.AccountModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection.AccountModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "code": {
+ "type": "string",
+ "nullable": true
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "description": {
+ "type": "string",
+ "nullable": true
+ },
+ "active": {
+ "type": "boolean"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "integrationMetadata": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection.ItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.InvoiceLineItemModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "active": {
+ "type": "boolean"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ },
+ "isCompound": {
+ "type": "boolean"
+ },
+ "isRecoverable": {
+ "type": "boolean"
+ },
+ "integrationMetadata": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.ReceiptAllocationModelSelection": {
+ "type": "object",
+ "properties": {
+ "receiptId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "receipt": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.ReceiptAllocationModelSelection.BasicReceiptModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.ReceiptAllocationModelSelection.BasicReceiptModelSelection": {
+ "type": "object",
+ "properties": {
+ "receiptNo": {
+ "type": "string",
+ "nullable": true
+ },
+ "effectiveDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "success": {
+ "type": "boolean"
+ },
+ "pending": {
+ "type": "boolean"
+ },
+ "refunded": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceGQL.Response.InvoiceModelSelection.SubscriptionPeriodModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "subPeriodStart": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "subPeriodEnd": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceStatus": {
+ "enum": [
+ "AUTHORISED",
+ "DELETED",
+ "DRAFT",
+ "PAID",
+ "PART_PAID",
+ "SUBMITTED",
+ "VOIDED"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoicesGQL.Response.PaginatedListOfInvoiceOverviewModelGraphTypeSelection": {
+ "type": "object",
+ "properties": {
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoicesGQL.Response.PaginatedListOfInvoiceOverviewModelGraphTypeSelection.InvoiceOverviewModelSelection"
+ },
+ "nullable": true
+ },
+ "pageNumber": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "pageSize": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "totalResults": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.InvoicesGQL.Response.PaginatedListOfInvoiceOverviewModelGraphTypeSelection.InvoiceOverviewModelSelection": {
+ "type": "object",
+ "properties": {
+ "createdOn": {
+ "type": "string",
+ "format": "date-time"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "date": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "integrationInvoiceNumber": {
+ "type": "string",
+ "nullable": true
+ },
+ "integrationType": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.InvoiceStatus"
+ },
+ "totalAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "totalAmountExcludingAdjustments": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "totalPaidAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "totalPendingAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "who": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.MonthOfYearInput": {
+ "type": "object",
+ "properties": {
+ "month": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "year": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.OptionsEditModelInput": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "reset": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode": {
+ "enum": [
+ "INCLUDE",
+ "MANUAL",
+ "NONE"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PayInvoiceGQL.Variables": {
+ "type": "object",
+ "properties": {
+ "invoiceId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "receiptId": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PaymentDirection": {
+ "enum": [
+ "INBOUND",
+ "OUTBOUND"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod": {
+ "enum": [
+ "CASH",
+ "CHEQUE",
+ "CREDIT_CARD",
+ "DIRECT_DEBIT",
+ "GENERIC",
+ "ONE_TIME_PAYMENT",
+ "PAYROLL_DEDUCTION",
+ "PROMPT_PAY",
+ "STATEMENT"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlanFeesForResolutionGQL.Response.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication": {
+ "enum": [
+ "FEE",
+ "RENEWAL_FEE"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType": {
+ "enum": [
+ "DISCOUNT",
+ "DISCOUNT_PERCENT",
+ "EXTRA"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlanType": {
+ "enum": [
+ "ANNIVERSARY",
+ "ANNIVERSARY_ROUNDED",
+ "ANNIVERSARY_ROUNDED_BY_INTERVAL",
+ "COMMON",
+ "COMMON_RENEWAL"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "fees": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.PlanFeeModelSelection"
+ },
+ "nullable": true
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.PlanOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "externalProviderId": {
+ "type": "string",
+ "nullable": true
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "earlyPeriod": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.DayOfMonthSelection"
+ },
+ "commonPeriod": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.CommonPeriodSelection"
+ },
+ "graceExpiry": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.GraceExpirySelection"
+ },
+ "planKey": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ },
+ "multiple": {
+ "type": "boolean"
+ },
+ "allowNominated": {
+ "type": "boolean"
+ },
+ "defaultEarlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "defaultEarlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "requirements": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.ConstraintRuleSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.CommonPeriodSelection": {
+ "type": "object",
+ "properties": {
+ "day": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "month": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.ConstraintRuleSelection": {
+ "type": "object",
+ "properties": {
+ "type": {
+ "type": "string",
+ "nullable": true
+ },
+ "fieldId": {
+ "type": "string",
+ "nullable": true
+ },
+ "values": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.DayOfMonthSelection": {
+ "type": "object",
+ "properties": {
+ "day": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "month": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.GraceExpirySelection": {
+ "type": "object",
+ "properties": {
+ "day": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "month": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.PlansGQL.Response.PlanModelSelection.PlanOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "allowLimit": {
+ "type": "boolean"
+ },
+ "defaultLimit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ProrateQuoteGQL.Response.SubscriptionProrateQuoteModelSelection": {
+ "type": "object",
+ "properties": {
+ "feeAmount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ProrateQuoteGQL.Response.SubscriptionProrateQuoteModelSelection.SubscriptionProrateOptionQuoteModelSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ProrateQuoteGQL.Response.SubscriptionProrateQuoteModelSelection.SubscriptionProrateOptionQuoteModelSelection": {
+ "type": "object",
+ "properties": {
+ "optionId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ProviderCapability": {
+ "enum": [
+ "ADD_METHOD",
+ "CAN_EDIT_EXPIRY",
+ "CUSTOMER",
+ "IMMEDIATE_PAYMENT",
+ "IMMEDIATE_REFUND",
+ "MANUAL_BATCH",
+ "OUT_OF_BAND",
+ "RECORD_PAYMENT",
+ "REVEAL_CUSTOMER_ID",
+ "REVEAL_SOURCE_ID",
+ "SCHEDULES"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "createdOn": {
+ "type": "string",
+ "format": "date-time"
+ },
+ "effectiveDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "description": {
+ "type": "string",
+ "nullable": true
+ },
+ "refunded": {
+ "type": "boolean"
+ },
+ "transactionRef": {
+ "type": "string",
+ "nullable": true
+ },
+ "receiptNo": {
+ "type": "string",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "status": {
+ "type": "string",
+ "nullable": true
+ },
+ "success": {
+ "type": "boolean"
+ },
+ "pending": {
+ "type": "boolean"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "replacementId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineItems": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection.LineItemModelSelection"
+ },
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "direction": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentDirection"
+ },
+ "balances": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection.SubscriptionBalanceModelSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection.LineItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "lineType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection.LineItemModelSelection.LineTypeModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection.LineItemModelSelection.LineTypeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptGQL.Response.ReceiptModelSelection.SubscriptionBalanceModelSelection": {
+ "type": "object",
+ "properties": {
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "arrearsPrev": {
+ "type": "integer",
+ "format": "int64"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection": {
+ "type": "object",
+ "properties": {
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection"
+ },
+ "nullable": true
+ },
+ "totalResults": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "createdOn": {
+ "type": "string",
+ "format": "date-time"
+ },
+ "effectiveDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "description": {
+ "type": "string",
+ "nullable": true
+ },
+ "refunded": {
+ "type": "boolean"
+ },
+ "transactionRef": {
+ "type": "string",
+ "nullable": true
+ },
+ "receiptNo": {
+ "type": "string",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "status": {
+ "type": "string",
+ "nullable": true
+ },
+ "success": {
+ "type": "boolean"
+ },
+ "pending": {
+ "type": "boolean"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "replacementId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineItems": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection"
+ },
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "direction": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentDirection"
+ },
+ "balances": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.SubscriptionBalanceModelSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "lineType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection.LineTypeModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.LineItemModelSelection.LineTypeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.ReceiptsGQL.Response.PaginatedListOfReceiptModelGraphTypeSelection.ReceiptModelSelection.SubscriptionBalanceModelSelection": {
+ "type": "object",
+ "properties": {
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "arrearsPrev": {
+ "type": "integer",
+ "format": "int64"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SetCustomerDefaultCreditCardGQL.Response.CustomerModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "defaultCreditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus"
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "overrideMode": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode"
+ },
+ "overrideAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "planType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "version": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion"
+ },
+ "paymentConfig": {
+ "type": "string",
+ "nullable": true
+ },
+ "start": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "end": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "holdReasonId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "holdReason": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.TagModelSelection"
+ },
+ "holdExpiry": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "lastBatch": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "intervalAttempts": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "totalAttempts": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "application": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "uses": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionGQL.Response.SubscriptionModelSelection.TagModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionOutstandingGQL.Response.LineItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionPayableLineItemsGQL.Response.LineItemModelSelection": {
+ "type": "object",
+ "properties": {
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "lineType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionPayableLineItemsGQL.Response.LineItemModelSelection.LineTypeModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionPayableLineItemsGQL.Response.LineItemModelSelection.LineTypeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "name": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus": {
+ "enum": [
+ "ACTIVE",
+ "CANCELLED",
+ "ENDED",
+ "ON_HOLD",
+ "PENDING"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion": {
+ "enum": [
+ "INITIAL",
+ "VERSION_2"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection": {
+ "type": "object",
+ "properties": {
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection"
+ },
+ "nullable": true
+ },
+ "totalResults": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus"
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.SubscriptionOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "overrideMode": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode"
+ },
+ "overrideAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "planType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "version": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionsGQL.Response.PaginatedListOfSubscriptionModelGraphTypeSelection.SubscriptionModelSelection.SubscriptionOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "application": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "uses": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.TaxRatesGQL.Response.PaginatedListOfTaxRateModelGraphTypeSelection": {
+ "type": "object",
+ "properties": {
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.TaxRatesGQL.Response.PaginatedListOfTaxRateModelGraphTypeSelection.TaxRateModelSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.TaxRatesGQL.Response.PaginatedListOfTaxRateModelGraphTypeSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "active": {
+ "type": "boolean"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateCreditCardExpiryGQL.Response.CreditCardModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.CreditCardType"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "maskedNumber": {
+ "type": "string",
+ "nullable": true
+ },
+ "expires": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateCreditCardExpiryGQL.Response.CreditCardModelSelection.MonthOfYearSelection"
+ },
+ "inUse": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateCreditCardExpiryGQL.Response.CreditCardModelSelection.MonthOfYearSelection": {
+ "type": "object",
+ "properties": {
+ "month": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "year": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdatePaymentIntentGQL.Variables": {
+ "type": "object",
+ "properties": {
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "intentId": {
+ "type": "string",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus"
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "overrideMode": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode"
+ },
+ "overrideAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "planType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "version": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "application": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "uses": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "status": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionStatus"
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "fee": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection"
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection"
+ },
+ "nullable": true
+ },
+ "overrideMode": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OverrideMode"
+ },
+ "overrideAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "arrears": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "planType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "version": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.SubscriptionVersion"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "renewalFee": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ },
+ "fee": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "planId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "currency": {
+ "type": "string",
+ "nullable": true
+ },
+ "interval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "units": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "alwaysDebit": {
+ "type": "boolean"
+ },
+ "effectiveFrom": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "overrideType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanType"
+ },
+ "prorate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "earlyRenewalUnits": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "earlyRenewalInterval": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.Interval"
+ },
+ "emailInvoices": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "itemId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "accountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRateId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "taxRate": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection"
+ },
+ "taxInclusive": {
+ "type": "boolean"
+ },
+ "plan": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.PlanModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "category": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.PlanFeeModelSelection.TaxRateModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "rate": {
+ "type": "number",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Financial.UpdateSubscriptionPaymentMethodGQL.Response.SubscriptionModelSelection.SubscriptionOptionModelSelection": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "amount": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "type": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionType"
+ },
+ "application": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PlanOptionApplication"
+ },
+ "limit": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "uses": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.AppliesToItemModelInput": {
+ "type": "object",
+ "properties": {
+ "targetId": {
+ "type": "string",
+ "nullable": true
+ },
+ "targetType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.AppliesToType"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.AppliesToType": {
+ "enum": [
+ "SUBSCRIPTION",
+ "TICKET"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.CalculateFormPointsInputModelInput": {
+ "type": "object",
+ "properties": {
+ "answers": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.CreateResponseAnswerModelInput"
+ },
+ "nullable": true
+ },
+ "formId": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.CreateResponseAnswerModelInput": {
+ "type": "object",
+ "properties": {
+ "answerBoolean": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "answerDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "answerInt": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "answerJson": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerOther": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerString": {
+ "type": "string",
+ "nullable": true
+ },
+ "questionName": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.DiscountType": {
+ "enum": [
+ "FIXED_RATE",
+ "PERCENTAGE"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.EntityModelInput": {
+ "type": "object",
+ "properties": {
+ "entityId": {
+ "type": "string",
+ "nullable": true
+ },
+ "entityType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.EntityType"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.EntityType": {
+ "enum": [
+ "ADDRESS",
+ "CALL_LIST",
+ "CONTACT",
+ "DELETED",
+ "EVENT",
+ "FORM_RESPONSE",
+ "INVOICE",
+ "LIST",
+ "ORGANIZATION",
+ "PERSON",
+ "RECEIPT",
+ "RELATIONSHIP",
+ "RELATIONSHIP_ADDRESS_DESCRIPTION",
+ "RELATIONSHIP_CONTACT_DESCRIPTION_MODEL",
+ "RELATIONSHIP_ORGANIZATION_MEMBERSHIP_DESCRIPTION",
+ "SUBSCRIPTION",
+ "TAG",
+ "TEST_ONLY_A",
+ "TEST_ONLY_B",
+ "TICKET",
+ "UNDEFINED",
+ "UNMAPPED",
+ "USER",
+ "VISIT_LIST",
+ "WORKPLACE"
+ ],
+ "type": "string"
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.FindFormsGQL.Response.PaginatedListOfFormListModelGraphTypeSelection.FormListModelSelection": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "title": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.FormFinancialLineItemInput": {
+ "type": "object",
+ "properties": {
+ "amount": {
+ "type": "integer",
+ "format": "int64"
+ },
+ "autoRenew": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "code": {
+ "type": "string",
+ "nullable": true
+ },
+ "comment": {
+ "type": "string",
+ "nullable": true
+ },
+ "feeId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "immediatePayment": {
+ "type": "boolean"
+ },
+ "invoice": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.InvoiceMetadataInput"
+ },
+ "lineTypeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "quantity": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "subscriptionId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "targetId": {
+ "type": "string",
+ "nullable": true
+ },
+ "targetType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.AppliesToType"
+ },
+ "unitAmount": {
+ "type": "integer",
+ "format": "int64",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.FormResponseMetadataModelInput": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "nullable": true
+ },
+ "value": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.InvoiceMetadataInput": {
+ "type": "object",
+ "properties": {
+ "account": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "item": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "taxInclusive": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "taxRate": {
+ "type": "number",
+ "format": "double",
+ "nullable": true
+ },
+ "trackingCodes": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.TrackingCodeMetadataInput"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.OwnerModelInputInput": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "string",
+ "nullable": true
+ },
+ "type": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.QuestionAnswerWithDataInput": {
+ "type": "object",
+ "properties": {
+ "answerBoolean": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "answerDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "answerInt": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "answerJson": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerOther": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerString": {
+ "type": "string",
+ "nullable": true
+ },
+ "data": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.ValidationFieldAnswerTypeInput"
+ },
+ "questionName": {
+ "type": "string",
+ "nullable": true
+ },
+ "type": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.TicketReservationInputInput": {
+ "type": "object",
+ "properties": {
+ "count": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "expiry": {
+ "type": "string",
+ "nullable": true
+ },
+ "fieldId": {
+ "type": "string",
+ "nullable": true
+ },
+ "id": {
+ "type": "string",
+ "nullable": true
+ },
+ "maxExpiryUtcDateTime": {
+ "type": "string",
+ "nullable": true
+ },
+ "owner": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.OwnerModelInputInput"
+ },
+ "status": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.TrackingCodeMetadataInput": {
+ "type": "object",
+ "properties": {
+ "categoryName": {
+ "type": "string",
+ "nullable": true
+ },
+ "codeCode": {
+ "type": "string",
+ "nullable": true
+ },
+ "codeName": {
+ "type": "string",
+ "nullable": true
+ },
+ "trackingCategoryId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "trackingCodeId": {
+ "type": "integer",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.ValidateAndSubmitResponseGQL.Response.ValidateAndSubmitFormResponseResultSelection": {
+ "type": "object",
+ "properties": {
+ "submitted": {
+ "type": "boolean"
+ },
+ "responseId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "message": {
+ "type": "string",
+ "nullable": true
+ },
+ "updatedAnswers": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.ValidateAndSubmitResponseGQL.Response.ValidateAndSubmitFormResponseResultSelection.QuestionAnswerWithDataSelection"
+ },
+ "nullable": true
+ },
+ "errors": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.ValidateAndSubmitResponseGQL.Response.ValidateAndSubmitFormResponseResultSelection.FormErrorSelection"
+ },
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.ValidateAndSubmitResponseGQL.Response.ValidateAndSubmitFormResponseResultSelection.FormErrorSelection": {
+ "type": "object",
+ "properties": {
+ "questionName": {
+ "type": "string",
+ "nullable": true
+ },
+ "message": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.ValidateAndSubmitResponseGQL.Response.ValidateAndSubmitFormResponseResultSelection.QuestionAnswerWithDataSelection": {
+ "type": "object",
+ "properties": {
+ "questionName": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerString": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerInt": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "answerDate": {
+ "type": "string",
+ "format": "date",
+ "nullable": true
+ },
+ "answerJson": {
+ "type": "string",
+ "nullable": true
+ },
+ "answerBoolean": {
+ "type": "boolean",
+ "nullable": true
+ },
+ "answerOther": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.ValidateDiscountResponseInput": {
+ "type": "object",
+ "properties": {
+ "amount": {
+ "type": "number",
+ "format": "double"
+ },
+ "appliesTo": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.AppliesToItemModelInput"
+ },
+ "nullable": true
+ },
+ "code": {
+ "type": "string",
+ "nullable": true
+ },
+ "codeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "description": {
+ "type": "string",
+ "nullable": true
+ },
+ "discountId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "discountType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.DiscountType"
+ },
+ "ownerId": {
+ "type": "string",
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.GraphQL.Forms.ValidationFieldAnswerTypeInput": {
+ "type": "object",
+ "properties": {
+ "discounts": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.ValidateDiscountResponseInput"
+ },
+ "nullable": true
+ },
+ "lineItems": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.FormFinancialLineItemInput"
+ },
+ "nullable": true
+ },
+ "method": {
+ "type": "string",
+ "nullable": true
+ },
+ "reservation": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Forms.TicketReservationInputInput"
+ }
+ },
+ "additionalProperties": false
+ },
+ "SwiftFox.Gateway.Host.Models.AddRecordsToStaticListInput": {
+ "type": "object",
+ "properties": {
+ "recordIds": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "description": "Gets or sets the collection of record identifiers to add.",
+ "nullable": true
+ },
+ "query": {
+ "type": "string",
+ "description": "Gets or sets an optional search query used to select records dynamically.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for adding records to a static list."
+ },
+ "SwiftFox.Gateway.Host.Models.AddressInput": {
+ "type": "object",
+ "properties": {
+ "type": {
+ "type": "string",
+ "description": "Gets or sets the address type (e.g. \"Home\", \"Work\").",
+ "nullable": true
+ },
+ "address1": {
+ "type": "string",
+ "description": "Gets or sets the first line of the street address.",
+ "nullable": true
+ },
+ "building": {
+ "type": "string",
+ "description": "Gets or sets the building name or number.",
+ "nullable": true
+ },
+ "locality": {
+ "type": "string",
+ "description": "Gets or sets the suburb or locality.",
+ "nullable": true
+ },
+ "state": {
+ "type": "string",
+ "description": "Gets or sets the state or territory.",
+ "nullable": true
+ },
+ "postCode": {
+ "type": "string",
+ "description": "Gets or sets the postcode.",
+ "nullable": true
+ },
+ "country": {
+ "type": "string",
+ "description": "Gets or sets the country code. Defaults to \"AU\".",
+ "nullable": true
+ },
+ "unique": {
+ "type": "string",
+ "description": "Gets a normalised uppercase composite key used to detect duplicate addresses.",
+ "nullable": true,
+ "readOnly": true
+ },
+ "empty": {
+ "type": "boolean",
+ "description": "Gets a value indicating whether all significant address fields are empty.",
+ "readOnly": true
+ },
+ "replace": {
+ "type": "boolean",
+ "description": "An optional bool flag to indicate if we want to replace Contacts.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model representing a physical address."
+ },
+ "SwiftFox.Gateway.Host.Models.ContactsInput": {
+ "type": "object",
+ "properties": {
+ "type": {
+ "type": "string",
+ "description": "The contact type",
+ "nullable": true
+ },
+ "value": {
+ "type": "string",
+ "description": "The contact value",
+ "nullable": true
+ },
+ "autoLinkTo": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Core.OwnerModelInputGraphType"
+ },
+ "note": {
+ "type": "string",
+ "description": "Notes about this contact",
+ "nullable": true
+ },
+ "replace": {
+ "type": "boolean",
+ "description": "An optional bool flag to indicate if we want to replace Contacts.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input data for contacts"
+ },
+ "SwiftFox.Gateway.Host.Models.CustomFieldsMetadata": {
+ "type": "object",
+ "properties": {
+ "allowMulti": {
+ "type": "boolean",
+ "description": "Gets or sets a value indicating whether multiple options can be selected."
+ },
+ "allowClear": {
+ "type": "boolean",
+ "description": "Gets or sets a value indicating whether the field value can be cleared."
+ },
+ "colourCoded": {
+ "type": "boolean",
+ "description": "Gets or sets a value indicating whether options are colour-coded."
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.Option"
+ },
+ "description": "Gets or sets the available options for this field.",
+ "nullable": true
+ },
+ "deletedOptions": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.Option"
+ },
+ "description": "Gets or sets the options that have been deleted but may still appear in historical data.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Metadata describing the configuration of a custom select field, including its available options."
+ },
+ "SwiftFox.Gateway.Host.Models.MakeContactPrimaryInput": {
+ "type": "object",
+ "properties": {
+ "contactId": {
+ "type": "integer",
+ "description": "Gets or sets the identifier of the contact detail to make primary.",
+ "format": "int32"
+ },
+ "ownerId": {
+ "type": "integer",
+ "description": "Gets or sets the identifier of the owning person or organisation.",
+ "format": "int32"
+ },
+ "ownerType": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Core.OwnerType"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for making a contact detail the primary contact for an owner."
+ },
+ "SwiftFox.Gateway.Host.Models.Option": {
+ "type": "object",
+ "properties": {
+ "label": {
+ "type": "string",
+ "description": "Gets or sets the display label for this option.",
+ "nullable": true
+ },
+ "colour": {
+ "type": "string",
+ "description": "Gets or sets the colour associated with this option.",
+ "nullable": true
+ },
+ "id": {
+ "type": "string",
+ "description": "Gets or sets the unique identifier for this option.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Represents a selectable option within a custom field."
+ },
+ "SwiftFox.Gateway.Host.Models.OrganisationInput": {
+ "type": "object",
+ "properties": {
+ "name": {
+ "type": "string",
+ "description": "Gets or sets the official name of the organisation.",
+ "nullable": true
+ },
+ "knownAsName": {
+ "type": "string",
+ "description": "Gets or sets the commonly known or trading name of the organisation.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for creating or updating an organisation."
+ },
+ "SwiftFox.Gateway.Host.Models.PersonInput": {
+ "type": "object",
+ "properties": {
+ "firstName": {
+ "type": "string",
+ "description": "Gets or sets the person's first name.",
+ "nullable": true
+ },
+ "lastName": {
+ "type": "string",
+ "description": "Gets or sets the person's last name.",
+ "nullable": true
+ },
+ "phone": {
+ "type": "string",
+ "description": "Gets or sets the person's phone number.",
+ "nullable": true
+ },
+ "mobile": {
+ "type": "string",
+ "description": "Gets or sets the person's mobile number.",
+ "nullable": true
+ },
+ "email": {
+ "type": "string",
+ "description": "Gets or sets the person's email address.",
+ "nullable": true
+ },
+ "dob": {
+ "type": "string",
+ "description": "Gets or sets the person's date of birth.",
+ "format": "date",
+ "nullable": true
+ },
+ "preventDuplicateContacts": {
+ "type": "boolean",
+ "description": "Gets or sets a value indicating whether duplicate contact detection should be enforced."
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for creating or updating a person record."
+ },
+ "SwiftFox.Gateway.Host.Models.PostAddressInput": {
+ "type": "object",
+ "properties": {
+ "formattedAddress": {
+ "type": "string",
+ "description": "Gets or sets the human-readable formatted address string.",
+ "nullable": true
+ },
+ "placeId": {
+ "type": "string",
+ "description": "Gets or sets the place identifier from the geocoding provider.",
+ "nullable": true
+ },
+ "lat": {
+ "type": "number",
+ "description": "Gets or sets the latitude of the address.",
+ "format": "double"
+ },
+ "lng": {
+ "type": "number",
+ "description": "Gets or sets the longitude of the address.",
+ "format": "double"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for a geocoded address obtained from a place search."
+ },
+ "SwiftFox.Gateway.Host.Models.PostInput": {
+ "type": "object",
+ "properties": {
+ "contents": {
+ "type": "string",
+ "description": "Gets or sets the text contents of the post.",
+ "nullable": true
+ },
+ "occuredOn": {
+ "type": "string",
+ "description": "Gets or sets the optional date and time the event occurred.",
+ "format": "date-time",
+ "nullable": true
+ },
+ "location": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Models.PostAddressInput"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for creating a post or activity feed entry."
+ },
+ "SwiftFox.Gateway.Host.Models.RemoveRecordsToStaticListInput": {
+ "type": "object",
+ "properties": {
+ "recordIds": {
+ "type": "array",
+ "items": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "description": "Gets or sets the collection of record identifiers to remove.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for removing records from a static list."
+ },
+ "SwiftFox.Gateway.Host.Models.SetupIntentInput": {
+ "type": "object",
+ "properties": {
+ "ownerId": {
+ "type": "string",
+ "description": "Gets or sets the identifier of the owner (person or organisation) associated with the payment.",
+ "nullable": true
+ },
+ "ownerType": {
+ "type": "string",
+ "description": "Gets or sets the owner type (e.g. \"Person\" or \"Organization\").",
+ "nullable": true
+ },
+ "name": {
+ "type": "string",
+ "description": "Gets or sets the name of the payer.",
+ "nullable": true
+ },
+ "email": {
+ "type": "string",
+ "description": "Gets or sets the email address of the payer.",
+ "nullable": true
+ },
+ "reference": {
+ "type": "string",
+ "description": "Gets or sets an optional reference identifier for the payment.",
+ "nullable": true
+ },
+ "meta": {
+ "type": "string",
+ "description": "Gets or sets optional metadata to attach to the payment intent.",
+ "nullable": true
+ },
+ "method": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.PaymentMethod"
+ },
+ "provider": {
+ "type": "string",
+ "description": "Gets or sets the payment provider identifier.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for setting up a payment intent."
+ },
+ "SwiftFox.Gateway.Host.Models.UpdateAddressInput": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "description": "Gets or sets the identifier of the address record to update.",
+ "format": "int32"
+ },
+ "sourceId": {
+ "type": "integer",
+ "description": "Gets or sets the identifier of the source address record.",
+ "format": "int32"
+ },
+ "type": {
+ "type": "string",
+ "description": "Gets or sets the address type (e.g. \"Home\", \"Work\").",
+ "nullable": true
+ },
+ "address1": {
+ "type": "string",
+ "description": "Gets or sets the first line of the street address.",
+ "nullable": true
+ },
+ "building": {
+ "type": "string",
+ "description": "Gets or sets the building name or number.",
+ "nullable": true
+ },
+ "locality": {
+ "type": "string",
+ "description": "Gets or sets the suburb or locality.",
+ "nullable": true
+ },
+ "state": {
+ "type": "string",
+ "description": "Gets or sets the state or territory.",
+ "nullable": true
+ },
+ "postCode": {
+ "type": "string",
+ "description": "Gets or sets the postcode.",
+ "nullable": true
+ },
+ "country": {
+ "type": "string",
+ "description": "Gets or sets the country code. Defaults to \"AU\".",
+ "nullable": true
+ },
+ "unique": {
+ "type": "string",
+ "description": "Gets a normalised uppercase composite key used to detect duplicate addresses.",
+ "nullable": true,
+ "readOnly": true
+ },
+ "empty": {
+ "type": "boolean",
+ "description": "Gets a value indicating whether all significant address fields are empty.",
+ "readOnly": true
+ },
+ "replace": {
+ "type": "boolean",
+ "description": "Gets or sets an optional flag indicating whether existing addresses should be replaced.",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input model for updating an existing address record."
+ },
+ "SwiftFox.Gateway.Host.Models.UpdateContactInput": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "description": "The id of the contact",
+ "format": "int32"
+ },
+ "type": {
+ "type": "string",
+ "description": "The contact type",
+ "nullable": true
+ },
+ "value": {
+ "type": "string",
+ "description": "The contact value",
+ "nullable": true
+ },
+ "note": {
+ "type": "string",
+ "description": "Notes about this contact",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Input data for contacts"
+ },
+ "SwiftFox.Gateway.Host.Models.UserResponse": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "string",
+ "description": "Gets the subject identifier of the authenticated user.",
+ "nullable": true,
+ "readOnly": true
+ },
+ "t": {
+ "type": "string",
+ "description": "Gets the tenant identifier of the authenticated user.",
+ "nullable": true,
+ "readOnly": true
+ },
+ "name": {
+ "type": "string",
+ "description": "Gets the display name of the authenticated user.",
+ "nullable": true,
+ "readOnly": true
+ },
+ "sub": {
+ "type": "string",
+ "description": "Gets the subject claim value of the authenticated user.",
+ "nullable": true,
+ "readOnly": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Response model representing the currently authenticated user, populated from JWT claims."
+ },
+ "SwiftFox.Gateway.Host.Services.CircleDto": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "string",
+ "description": "Unique identifier.",
+ "nullable": true
+ },
+ "name": {
+ "type": "string",
+ "description": "Circle name.",
+ "nullable": true
+ },
+ "type": {
+ "type": "string",
+ "description": "Circle type (circle, domain, unit).",
+ "nullable": true
+ },
+ "domain": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "description": "List of domains this circle covers.",
+ "nullable": true
+ },
+ "include": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "description": "List of include values.",
+ "nullable": true
+ },
+ "roles": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ },
+ "description": "List of roles associated with this circle.",
+ "nullable": true
+ },
+ "candidateId": {
+ "type": "string",
+ "description": "Candidate ID from campaigns config (optional, only present if set).",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false,
+ "description": "Data transfer object for a single circle."
+ },
+ "SwiftFox.Gateway.Host.Services.CirclesResponse": {
+ "type": "object",
+ "properties": {
+ "total": {
+ "type": "integer",
+ "description": "Total number of circles available.",
+ "format": "int32"
+ },
+ "items": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.Services.CircleDto"
+ },
+ "description": "List of circles in the current page.",
+ "nullable": true
+ },
+ "page": {
+ "type": "integer",
+ "description": "Current page number (1-based).",
+ "format": "int32"
+ },
+ "pageSize": {
+ "type": "integer",
+ "description": "Page size.",
+ "format": "int32"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Response model for circles list."
+ },
+ "SwiftFox.Gateway.Host.Services.FinancialManager.SetupIntentResponse.IntentWithData": {
+ "type": "object",
+ "properties": {
+ "key": {
+ "type": "string",
+ "nullable": true
+ },
+ "error": {
+ "type": "string",
+ "nullable": true
+ },
+ "intentId": {
+ "type": "string",
+ "nullable": true
+ },
+ "data": {
+ "$ref": "#/components/schemas/System.Text.Json.Nodes.JsonNode"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Payment intent data with additional provider-specific information."
+ },
+ "SwiftFox.Gateway.Host.Services.FinancialManager.UpdateIntentResponse.UpdatedIntentWithData": {
+ "type": "object",
+ "properties": {
+ "key": {
+ "type": "string",
+ "nullable": true
+ },
+ "error": {
+ "type": "string",
+ "nullable": true
+ },
+ "intentId": {
+ "type": "string",
+ "nullable": true
+ },
+ "data": {
+ "$ref": "#/components/schemas/System.Text.Json.Nodes.JsonNode"
+ }
+ },
+ "additionalProperties": false,
+ "description": "Updated payment intent data with additional provider-specific information."
+ },
+ "System.Text.Json.Nodes.JsonNode": {
+ "type": "object",
+ "properties": {
+ "options": {
+ "$ref": "#/components/schemas/System.Text.Json.Nodes.JsonNodeOptions"
+ },
+ "parent": {
+ "$ref": "#/components/schemas/System.Text.Json.Nodes.JsonNode"
+ },
+ "root": {
+ "$ref": "#/components/schemas/System.Text.Json.Nodes.JsonNode"
+ }
+ },
+ "additionalProperties": false
+ },
+ "System.Text.Json.Nodes.JsonNodeOptions": {
+ "type": "object",
+ "properties": {
+ "propertyNameCaseInsensitive": {
+ "type": "boolean"
+ }
+ },
+ "additionalProperties": false
+ },
+ "UpdateSubscriptionInput": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "feeId": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "autoRenew": {
+ "type": "boolean"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "directDebitId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true,
+ "deprecated": true
+ },
+ "options": {
+ "type": "array",
+ "items": {
+ "$ref": "#/components/schemas/SwiftFox.Gateway.Host.GraphQL.Financial.OptionsEditModelInput"
+ },
+ "nullable": true
+ },
+ "method": {
+ "type": "string",
+ "nullable": true
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ },
+ "paymentConfig": {
+ "type": "string",
+ "nullable": true
+ },
+ "nextAttempt": {
+ "type": "string",
+ "nullable": true
+ },
+ "nominatedFee": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "paidTo": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ },
+ "UpdateSubscriptionPaymentMethodInput": {
+ "type": "object",
+ "properties": {
+ "id": {
+ "type": "integer",
+ "format": "int32"
+ },
+ "creditCardId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "bankAccountId": {
+ "type": "integer",
+ "format": "int32",
+ "nullable": true
+ },
+ "method": {
+ "type": "string",
+ "nullable": true
+ },
+ "provider": {
+ "type": "string",
+ "nullable": true
+ }
+ },
+ "additionalProperties": false
+ }
+ },
+ "securitySchemes": {
+ "Bearer": {
+ "type": "apiKey",
+ "description": "Please insert JWT with Bearer into field",
+ "name": "Authorization",
+ "in": "header"
+ }
+ }
+ },
+ "security": [
+ {
+ "Bearer": [ ]
+ }
+ ]
+}
